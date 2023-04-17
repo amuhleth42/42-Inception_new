@@ -1,13 +1,11 @@
-FROM debian:buster
+FROM alpine:3.16
 
-RUN apt update
+RUN	apk update
+RUN apk upgrade
+RUN apk add --no-cache mariadb mariadb-client
 
-RUN apt install -y mariadb-server mariadb-client
+COPY conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
-COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY tools/entrypoint.sh /tmp/entrypoint.sh
 
-COPY tools/init.sh /run/init.sh
-
-RUN bash /run/init.sh
-
-CMD mysqld_safe
+CMD ["sh", "/tmp/entrypoint.sh"]
