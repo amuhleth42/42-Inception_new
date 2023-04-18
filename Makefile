@@ -2,7 +2,7 @@ NAME = 		inception
 
 COMPOSE =	-f ./srcs/docker-compose.yml
 
-DOCKER =	docker compose $(COMPOSE) -p $(NAME)
+DOCKER =	docker-compose $(COMPOSE) -p $(NAME)
 
 
 
@@ -19,8 +19,8 @@ down:
 
 clean:
 	$(DOCKER) down --volumes
-	sudo rm -rf /Users/aymerikikette/data/wp_db/*
-	sudo rm -rf /Users/aymerikikette/data/wp_site/*
+	sudo rm -rf /home/amuhleth/data/wp_db/*
+	sudo rm -rf /home/amuhleth/data/wp_site/*
 
 re:	clean build start
 
